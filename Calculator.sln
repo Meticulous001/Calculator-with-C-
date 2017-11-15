@@ -1,23 +1,123 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Windows Desktop
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{2A8C71AF-1827-4D66-90EB-72E0C251E446}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2A8C71AF-1827-4D66-90EB-72E0C251E446}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A8C71AF-1827-4D66-90EB-72E0C251E446}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A8C71AF-1827-4D66-90EB-72E0C251E446}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A8C71AF-1827-4D66-90EB-72E0C251E446}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2A8C71AF-1827-4D66-90EB-72E0C251E446}.Release|Any CPU.Deploy.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-EndGlobal
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Calculator
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Add_Click(object sender, EventArgs e)
+        {
+            double num1, num2, result;
+            num1 = double.Parse(textBox1.Text);
+            num2 = double.Parse(textBox2.Text);
+
+
+            result = num1 + num2;
+
+            resultBox.Text = result.ToString();
+
+        }
+
+        private void Multiply_Click(object sender, EventArgs e)
+        {
+           double num1, num2, result;
+
+           num1 = double.Parse(textBox1.Text);
+           num2 = double.Parse(textBox2.Text);
+
+           result = num1 * num2;
+           resultBox.Text = result.ToString();
+
+
+        }
+        
+
+        private void Subtract_Click_1(object sender, EventArgs e)
+        {
+            double num1, num2, result;
+            num1 = double.Parse(textBox1.Text);
+            num2 = double.Parse(textBox2.Text);
+
+            result = (num1) - (num2);
+            resultBox.Text = result.ToString();
+
+        }
+
+        private void Divide_Click_1(object sender, EventArgs e)
+        {
+
+            double num1, num2, result;
+
+            num1 = double.Parse(textBox1.Text);
+            num2 = double.Parse(textBox2.Text);
+
+            result = (num1) / (num2);
+
+            resultBox.Text = result.ToString();
+           
+        }
+
+        private void Clear_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "0";
+            textBox2.Text = "0";
+            resultBox.Text = "0";
+            
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if( !Char.IsDigit(ch) && ch != 8 && ch != 46) //where 8 = backspace
+            {
+               // if(Text.Contains('.'))
+                e.Handled = true;
+                
+            }
+
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if(!Char.IsDigit(ch) && ch != 8 && ch != 46)
+            {
+              //   if(Text.Contains('.'))
+
+                e.Handled = true;
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult dialog = MessageBox.Show("Do you really want to exit?", "Exit", MessageBoxButtons.YesNoCancel);
+
+            if (dialog == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
